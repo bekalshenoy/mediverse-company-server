@@ -58,7 +58,6 @@ model User {
   userId                          String   @id @db.VarChar(320)
   password                         String   @db.Char(60)
   role                             Role
-  enabled                          Int      @db.SmallInt
   name                             String   @db.VarChar(320)
   phone                            String?  @db.VarChar(12)
   location                         String?  @db.VarChar(500)
