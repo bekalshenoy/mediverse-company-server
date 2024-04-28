@@ -85,7 +85,7 @@ export class PatientService {
   ): Promise<MedicalReport> {
     const report: Report = await this.prismaService.report.findUnique({
       where: {
-        entryId: entryId,
+        entryId: Number(entryId),
       },
     });
 

@@ -11,7 +11,7 @@ export enum Role {
   providedIn: 'root',
 })
 export class ApiService {
-  baseUrl: string = '';
+  baseUrl: string = '/api/v1';
 
   constructor() {}
 
@@ -61,22 +61,16 @@ export class ApiService {
   }
 
   async loginAdmin(userId: string, password: string): Promise<void> {
-    const response: Response = await fetch(
-      `${this.baseUrl}/auth/` +
-        Role.ADMIN +
-        '?' +
-        new URLSearchParams({
-          userId: userId,
-          password: password,
-        }),
-      {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'include',
+    const response: Response = await fetch(`${this.baseUrl}/auth`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
       },
-    );
+      body: JSON.stringify({
+        userId: userId,
+        password: password,
+      }),
+    });
 
     await this.checkResponse(response);
 
@@ -89,7 +83,7 @@ export class ApiService {
     if (!response.ok) {
       const errorResponse = await response.json();
 
-      alert(errorResponse);
+      alert(errorResponse.message);
 
       throw new Error(errorResponse);
     }

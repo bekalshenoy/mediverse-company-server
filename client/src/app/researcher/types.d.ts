@@ -1,5 +1,7 @@
 export interface Model {
-  usage: number;
+  _count: {
+    usage: number;
+  };
   modelId: number | null;
   name: string;
   description: string;
@@ -10,8 +12,8 @@ export interface Model {
 
 export interface Payment {
   paymentId: number;
-  userId: number;
-  modelId: string;
+  userId: string;
+  modelId: number;
   amount: number;
   startDate: string;
   endDate: string;

@@ -55,7 +55,6 @@ export class PatientComponent implements OnInit {
 
   async addFamilyMember(): Promise<void> {
     if (this.addMember.invalid) {
-      alert(this.addMember.errors);
     } else {
       await this.apiService.addFamilyMember(this.addMember.value);
       this.addMember.reset();
@@ -65,7 +64,6 @@ export class PatientComponent implements OnInit {
 
   async deleteFamilyMember(): Promise<void> {
     if (this.deleteMember.invalid) {
-      alert(this.deleteMember.errors);
     } else {
       await this.apiService.deleteFamilyMember(this.deleteMember.value);
       this.deleteMember.reset();
@@ -77,7 +75,7 @@ export class PatientComponent implements OnInit {
     this.reports.set(await this.apiService.getReports(userId));
   }
 
-  async getMedicalReport(reportId: string): Promise<void> {
+  async getMedicalReport(reportId: number): Promise<void> {
     this.medicalReport.set(
       await this.apiService.getMedicalReport(
         reportId,

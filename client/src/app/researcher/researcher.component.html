@@ -14,20 +14,20 @@
   </div>
 
   @if (currentSection() == 1) {
-    <div id="models" class="section">
+    <div class="section">
       @for (model of models(); track model.modelId) {
         <div class="card">
           <p>Name: {{ model.name }}</p>
           <p>Description: {{ model.description }}</p>
           <p>Cost: {{ model.cost }}₹</p>
-          <p>Usage: {{ model.usage }}+</p>
-          <p>Est. Earning: {{ model.usage * model.cost }}₹</p>
+          <p>Usage: {{ model._count.usage }}+</p>
+          <p>Est. Earning: {{ model._count.usage * model.cost }}₹</p>
         </div>
       }
     </div>
   }
   @if (currentSection() == 2) {
-    <div id="payments" class="section">
+    <div class="section">
       @for (payment of payments(); track payment.paymentId) {
         <div class="card">
           <p>Name: {{ payment.modelId }}</p>

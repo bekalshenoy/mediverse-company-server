@@ -30,14 +30,14 @@ export interface Family {
 }
 
 export interface Report {
-  entryId: string;
-  reportId: string;
+  entryId: number;
+  reportId: number;
   patientId: string;
   hospitalId: string;
 }
 
 export interface MedicalReport {
-  reportId: string;
+  reportId: number;
   patientId: string;
   doctorId: string;
   createdAt: string;
@@ -47,7 +47,7 @@ export interface MedicalReport {
 
 export interface Section {
   sectionId: string;
-  reportId: string;
+  reportId: number;
   question: string;
   answer: string;
   position: number;

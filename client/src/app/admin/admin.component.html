@@ -3,18 +3,18 @@
     <h2>Add Hospital</h2>
     <input type="email" placeholder="Email" formControlName="userId" />
     <input type="text" placeholder="Name" formControlName="name" />
-    <input type="number" placeholder="Phone" formControlName="phone" />
+    <input type="text" placeholder="Phone" formControlName="phone" />
     <input type="text" placeholder="Location" formControlName="location" />
     <input type="password" placeholder="Password" formControlName="password" />
     <input type="text" placeholder="Server" formControlName="server" />
     <button type="submit">Add</button>
   </form>
 
-  <form class="card" [formGroup]="researcherForm" (ngSubmit)="(addResearcher)">
+  <form class="card" [formGroup]="researcherForm" (ngSubmit)="addResearcher()">
     <h2>Add Researcher</h2>
     <input type="email" placeholder="Email" formControlName="userId" />
     <input type="text" placeholder="Name" formControlName="name" />
-    <input type="number" placeholder="Phone" formControlName="phone" />
+    <input type="text" placeholder="Phone" formControlName="phone" />
     <input type="text" placeholder="Location" formControlName="location" />
     <input type="password" placeholder="Password" formControlName="password" />
     <button type="submit">Add</button>

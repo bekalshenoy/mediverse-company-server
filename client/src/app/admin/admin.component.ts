@@ -30,6 +30,7 @@ export class AdminComponent implements OnInit {
       Validators.required,
       Validators.maxLength(12),
       Validators.minLength(10),
+      Validators.pattern('[0-9]*'),
     ]),
     password: new FormControl('', [
       Validators.required,
@@ -100,7 +101,6 @@ export class AdminComponent implements OnInit {
 
   async addHospital(): Promise<void> {
     if (this.hospitalForm.invalid) {
-      alert(this.hospitalForm.errors);
     } else {
       await this.apiService.addHospital(this.hospitalForm.value as Hospital);
       this.hospitalForm.reset();
@@ -110,7 +110,6 @@ export class AdminComponent implements OnInit {
 
   async addResearcher(): Promise<void> {
     if (this.researcherForm.invalid) {
-      alert(this.researcherForm.errors);
     } else {
       await this.apiService.addResearcher(
         this.researcherForm.value as Researcher,
@@ -122,7 +121,6 @@ export class AdminComponent implements OnInit {
 
   async addModel(): Promise<void> {
     if (this.modelForm.invalid) {
-      alert(this.modelForm.errors);
     } else {
       await this.apiService.addModel(
         this.modelForm.value as Model,

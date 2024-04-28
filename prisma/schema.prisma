@@ -56,12 +56,12 @@ model Usage {
 
 model User {
   userId                          String   @id @db.VarChar(320)
-  password                         String   @db.Char(60)
+  password                         String   @db.Char(100)
   role                             Role
   name                             String   @db.VarChar(320)
   phone                            String?  @db.VarChar(12)
   location                         String?  @db.VarChar(500)
-  dob                              String?  @db.Char(60)
+  dob                              String?  @db.Char(100)
   server                           String?  @db.VarChar(320)
   family                           Family[] 
   model                            Model[]

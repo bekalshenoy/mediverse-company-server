@@ -62,7 +62,7 @@ export class ApiService {
   }
 
   async getMedicalReport(
-    entryId: string,
+    entryId: number,
     dob: string,
     password: string,
   ): Promise<MedicalReport> {

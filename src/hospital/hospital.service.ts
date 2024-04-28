@@ -162,7 +162,7 @@ export class HospitalService {
   async deleteReport(reportId: number, currentUser: User): Promise<void> {
     await this.prismaService.report.deleteMany({
       where: {
-        reportId: reportId,
+        reportId: Number(reportId),
         hospitalId: currentUser.userId,
       },
     });

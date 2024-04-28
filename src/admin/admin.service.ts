@@ -80,6 +80,16 @@ export class AdminService {
       throw new BadRequestException("User Already Exists");
     }
 
+    const researcher: User = await this.prismaService.user.findUnique({
+      where: {
+        userId: model.researcherId,
+      },
+    });
+
+    if (researcher == null || researcher.role !== Role.ROLE_RESEARCHER) {
+      throw new BadRequestException("Researcher Id is invalid");
+    }
+
     await this.prismaService.user.create({
       data: {
         userId: model.name,
@@ -90,7 +100,13 @@ export class AdminService {
     });
 
     await this.prismaService.model.create({
-      data: model,
+      data: {
+        name: model.name,
+        description: model.description,
+        researcherId: model.researcherId,
+        cost: model.cost,
+        server: model.server,
+      },
     });
   }
 
@@ -113,6 +129,7 @@ export class AdminService {
   }
 
   async deleteModel(modelId: number): Promise<void> {
+    modelId = Number(modelId);
     const existingModel: Model = await this.prismaService.model.findUnique({
       where: {
         modelId: modelId,
