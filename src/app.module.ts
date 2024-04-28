@@ -10,6 +10,8 @@ import { ResearcherModule } from "./researcher/researcher.module";
 import { CurrentUserMiddleware } from "./middlewares/current-user.middleware";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { APP_PIPE } from "@nestjs/core";
+import { join } from "path";
+import { ServeStaticModule } from "@nestjs/serve-static";
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const cookieSession = require("cookie-session");
 
@@ -18,6 +20,9 @@ const cookieSession = require("cookie-session");
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: `.env.${process.env.NODE_ENV}`,
+    }),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, "../../client/dist/browser"),
     }),
     AdminModule,
     HospitalModule,

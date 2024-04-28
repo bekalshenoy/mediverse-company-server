@@ -6,6 +6,7 @@ import {
   Param,
   Post,
   Query,
+  Session,
   UseGuards,
 } from "@nestjs/common";
 import { PatientService } from "./patient.service";
@@ -21,9 +22,9 @@ import { AuthGuard } from "src/guards/auth.guard";
 export class PatientController {
   constructor(private patientService: PatientService) {}
 
-  @Get("/:id")
-  async getPatient(@Param("id") patientId: string): Promise<Patient> {
-    return await this.patientService.getPatient(patientId);
+  @Get("/")
+  async getPatient(@Session() session: any): Promise<Patient> {
+    return await this.patientService.getPatient(session.userId);
   }
 
   @Get("/hospital")

@@ -1,0 +1,106 @@
+<div class="app">
+  <form class="card" [formGroup]="hospitalForm" (ngSubmit)="addHospital()">
+    <h2>Add Hospital</h2>
+    <input type="email" placeholder="Email" formControlName="userId" />
+    <input type="text" placeholder="Name" formControlName="name" />
+    <input type="number" placeholder="Phone" formControlName="phone" />
+    <input type="text" placeholder="Location" formControlName="location" />
+    <input type="password" placeholder="Password" formControlName="password" />
+    <input type="text" placeholder="Server" formControlName="server" />
+    <button type="submit">Add</button>
+  </form>
+
+  <form class="card" [formGroup]="researcherForm" (ngSubmit)="(addResearcher)">
+    <h2>Add Researcher</h2>
+    <input type="email" placeholder="Email" formControlName="userId" />
+    <input type="text" placeholder="Name" formControlName="name" />
+    <input type="number" placeholder="Phone" formControlName="phone" />
+    <input type="text" placeholder="Location" formControlName="location" />
+    <input type="password" placeholder="Password" formControlName="password" />
+    <button type="submit">Add</button>
+  </form>
+
+  <form class="card" [formGroup]="modelForm" (ngSubmit)="addModel()">
+    <h2>Add Model</h2>
+    <input type="text" placeholder="Name" formControlName="name" />
+    <input
+      type="text"
+      placeholder="Description"
+      formControlName="description"
+    />
+    <input type="number" placeholder="Cost" formControlName="cost" />
+    <input type="text" placeholder="Server" formControlName="server" />
+    <input
+      type="email"
+      placeholder="Researcher"
+      formControlName="researcherId"
+    />
+    <input type="password" placeholder="Password" formControlName="password" />
+    <button type="submit">Add</button>
+  </form>
+
+  <h1>Users</h1>
+  <div>
+    <div>
+      Select One:
+      <span
+        [ngClass]="{ active: currentSection() == 1 }"
+        (click)="currentSection.set(1)"
+      >
+        Hospitals
+      </span>
+      <span
+        [ngClass]="{ active: currentSection() == 2 }"
+        (click)="currentSection.set(2)"
+      >
+        Researchers
+      </span>
+      <span
+        [ngClass]="{ active: currentSection() == 3 }"
+        (click)="currentSection.set(3)"
+      >
+        Models
+      </span>
+    </div>
+
+    @if(currentSection() == 1){
+    <div class="section">
+      @for(hospital of hospitals(); track hospital.userId){
+      <div class="card">
+        <p>{{ hospital.userId }}</p>
+        <p>{{ hospital.name }}</p>
+        <p>{{ hospital.phone }}</p>
+        <p>{{ hospital.location }}</p>
+        <p>{{ hospital.server }}</p>
+        <button (click)="deleteHospital(hospital.userId)">delete</button>
+      </div>
+      }
+    </div>
+    } @else if(currentSection() == 2){
+    <div class="section">
+      @for(researcher of researchers(); track researcher.userId){
+      <div class="card">
+        <p>{{ researcher.userId }}</p>
+        <p>{{ researcher.name }}</p>
+        <p>{{ researcher.phone }}</p>
+        <p>{{ researcher.location }}</p>
+        <button (click)="deleteResearcher(researcher.userId)">delete</button>
+      </div>
+      }
+    </div>
+    } @else if(currentSection() == 3){
+    <div class="section">
+      @for(model of models(); track model.modelId){
+      <div class="card">
+        <p>{{ model.name }}</p>
+        <p>{{ model.description }}</p>
+        <p>{{ model.cost }}</p>
+        <p>{{ model.server }}</p>
+        <p>{{ model.researcherId }}</p>
+        <button (click)="deleteModel(model.modelId)">delete</button>
+      </div>
+      }
+    </div>
+    }
+  </div>
+</div>
