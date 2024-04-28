@@ -1,6 +1,5 @@
-import { Controller, UseGuards, Get } from "@nestjs/common";
-import { Model, Payment, Role, User } from "@prisma/client";
-import { CurrentUser } from "src/decorators/current-user.decorator";
+import { Controller, UseGuards, Get, Req } from "@nestjs/common";
+import { Model, Payment, Role } from "@prisma/client";
 import { AuthGuard } from "src/guards/auth.guard";
 import { ResearcherService } from "./researcher.service";
 
@@ -10,12 +9,12 @@ export class ResearcherController {
   constructor(private researcherService: ResearcherService) {}
 
   @Get("/model")
-  async getModels(@CurrentUser() currentUser: User): Promise<Model[]> {
-    return await this.researcherService.getModels(currentUser);
+  async getModels(@Req() req): Promise<Model[]> {
+    return await this.researcherService.getModels(req.user);
   }
 
   @Get("/payment")
-  async getMPayments(@CurrentUser() currentUser: User): Promise<Payment[]> {
-    return await this.researcherService.getPayments(currentUser);
+  async getMPayments(@Req() req): Promise<Payment[]> {
+    return await this.researcherService.getPayments(req.user);
   }
 }

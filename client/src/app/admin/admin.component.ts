@@ -9,7 +9,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { Role } from '../api.service';
+import { Role } from '../login/api.service';
 
 @Component({
   selector: 'app-admin',

@@ -6,13 +6,13 @@ import {
   Param,
   Post,
   Query,
+  Req,
   UseGuards,
 } from "@nestjs/common";
-import { Model, Payment, Role, User } from "@prisma/client";
+import { Model, Payment, Role } from "@prisma/client";
 import { AuthGuard } from "src/guards/auth.guard";
 import { HospitalService } from "./hospital.service";
 import { Patient } from "src/dto/patient.dto";
-import { CurrentUser } from "src/decorators/current-user.decorator";
 
 @Controller("/api/v1/hospital")
 @UseGuards(new AuthGuard(Role.ROLE_HOSPITAL))
@@ -55,29 +55,26 @@ export class HospitalController {
   }
 
   @Get("/model")
-  async getModels(@CurrentUser() currentUser: User): Promise<Model[]> {
-    return await this.hospitalService.getModels(currentUser);
+  async getModels(@Req() req): Promise<Model[]> {
+    return await this.hospitalService.getModels(req.user);
   }
 
   @Post("/report/:reportId/patient/:patientId")
   async addReport(
     @Param("reportId") reportId: number,
     @Param("patientId") patientId: string,
-    @CurrentUser() currentUser: User,
+    @Req() req,
   ): Promise<void> {
-    await this.hospitalService.addReport(reportId, patientId, currentUser);
+    await this.hospitalService.addReport(reportId, patientId, req.user);
   }
 
   @Delete("/report/:id")
-  async deleteReport(
-    @Param("id") reportId: number,
-    @CurrentUser() currentUser: User,
-  ): Promise<void> {
-    await this.hospitalService.deleteReport(reportId, currentUser);
+  async deleteReport(@Param("id") reportId: number, @Req() req): Promise<void> {
+    await this.hospitalService.deleteReport(reportId, req.user);
   }
 
   @Get("/payment")
-  async getPayments(@CurrentUser() currentUser: User): Promise<Payment[]> {
-    return await this.hospitalService.getPayments(currentUser);
+  async getPayments(@Req() req): Promise<Payment[]> {
+    return await this.hospitalService.getPayments(req.user);
   }
 }

@@ -5,9 +5,9 @@ import {
   InternalServerErrorException,
   MethodNotAllowedException,
   NotFoundException,
+  Req,
 } from "@nestjs/common";
 import { Family, Report, Role, User } from "@prisma/client";
-import { CurrentUser } from "src/decorators/current-user.decorator";
 import { MedicalReport } from "src/dto/medical-report.dto";
 import { Patient } from "src/dto/patient.dto";
 import { PrismaService } from "src/prisma.service";
@@ -132,10 +132,10 @@ export class PatientService {
     await this.prismaService.family.create({ data: family });
   }
 
-  async deleteFamily(memberId: string, @CurrentUser() currentUser: User) {
+  async deleteFamily(memberId: string, @Req() req) {
     const family: Family[] = await this.prismaService.family.findMany({
       where: {
-        userId: currentUser.userId,
+        userId: req.user.userId,
       },
     });
 
@@ -148,7 +148,7 @@ export class PatientService {
     await this.prismaService.family.deleteMany({
       where: {
         memberId: memberId,
-        userId: currentUser.userId,
+        userId: req.user.userId,
       },
     });
   }

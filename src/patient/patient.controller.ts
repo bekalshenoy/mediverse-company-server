@@ -6,12 +6,12 @@ import {
   Param,
   Post,
   Query,
+  Req,
   Session,
   UseGuards,
 } from "@nestjs/common";
 import { PatientService } from "./patient.service";
-import { Family, Report, Role, User } from "@prisma/client";
-import { CurrentUser } from "src/decorators/current-user.decorator";
+import { Family, Report, Role } from "@prisma/client";
 import { MedicalReport } from "src/dto/medical-report.dto";
 import { Hospital } from "src/dto/hospital.dto";
 import { Patient } from "src/dto/patient.dto";
@@ -28,8 +28,8 @@ export class PatientController {
   }
 
   @Get("/hospital")
-  async getHospitals(@CurrentUser() currentUser: User): Promise<Hospital[]> {
-    return await this.patientService.getHospitals(currentUser);
+  async getHospitals(@Req() req): Promise<Hospital[]> {
+    return await this.patientService.getHospitals(req.user);
   }
 
   @Get("/report/hospital/:id")
@@ -42,29 +42,23 @@ export class PatientController {
     @Param("id") entryId: number,
     @Query("dob") dob: string,
     @Query("password") password: string,
-    @CurrentUser() currentUser: User,
+    @Req() req,
   ): Promise<MedicalReport> {
     return await this.patientService.getReport(
       entryId,
       password,
       dob,
-      currentUser,
+      req.user,
     );
   }
 
   @Post("/family")
-  async addFamily(
-    @Body() family: Family,
-    @CurrentUser() currentUser: User,
-  ): Promise<void> {
-    await this.patientService.addFamily(family, currentUser);
+  async addFamily(@Body() family: Family, @Req() req): Promise<void> {
+    await this.patientService.addFamily(family, req.user);
   }
 
   @Delete("/family/:id")
-  async deleteFamily(
-    @Param("id") memberId: string,
-    @CurrentUser() currentUser: User,
-  ): Promise<void> {
-    await this.patientService.deleteFamily(memberId, currentUser);
+  async deleteFamily(@Param("id") memberId: string, @Req() req): Promise<void> {
+    await this.patientService.deleteFamily(memberId, req.user);
   }
 }

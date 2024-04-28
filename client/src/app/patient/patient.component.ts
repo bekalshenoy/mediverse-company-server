@@ -3,7 +3,7 @@ import { MedicalReport, Patient, Report, User } from './types';
 import { ApiService } from './api.service';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Role } from '../api.service';
+import { Role } from '../login/api.service';
 
 @Component({
   selector: 'app-patient',

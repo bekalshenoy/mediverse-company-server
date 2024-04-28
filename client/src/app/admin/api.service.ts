@@ -14,9 +14,9 @@ export class ApiService {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: this.token(),
       },
       body: JSON.stringify(hospital),
-      credentials: 'include',
     });
 
     await this.checkResponse(response);
@@ -27,9 +27,9 @@ export class ApiService {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: this.token(),
       },
       body: JSON.stringify(researcher),
-      credentials: 'include',
     });
 
     await this.checkResponse(response);
@@ -45,9 +45,9 @@ export class ApiService {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          Authorization: this.token(),
         },
         body: JSON.stringify(model),
-        credentials: 'include',
       },
     );
 
@@ -59,8 +59,8 @@ export class ApiService {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: this.token(),
       },
-      credentials: 'include',
     });
 
     await this.checkResponse(response);
@@ -73,8 +73,8 @@ export class ApiService {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: this.token(),
       },
-      credentials: 'include',
     });
 
     await this.checkResponse(response);
@@ -87,8 +87,8 @@ export class ApiService {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: this.token(),
       },
-      credentials: 'include',
     });
 
     await this.checkResponse(response);
@@ -103,8 +103,8 @@ export class ApiService {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
+          Authorization: this.token(),
         },
-        credentials: 'include',
       },
     );
 
@@ -118,19 +118,23 @@ export class ApiService {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
+          Authorization: this.token(),
         },
-        credentials: 'include',
       },
     );
 
     await this.checkResponse(response);
   }
 
+  token(): string {
+    return 'Bearer ' + sessionStorage.getItem('token');
+  }
+
   private async checkResponse(response: Response): Promise<void> {
     if (!response.ok) {
       const errorResponse = await response.json();
 
-      alert(errorResponse);
+      alert(errorResponse.message);
 
       throw new Error(errorResponse);
     }

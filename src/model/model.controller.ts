@@ -1,7 +1,6 @@
-import { Body, Controller, Post, Query } from "@nestjs/common";
+import { Body, Controller, Post, Query, Req } from "@nestjs/common";
 import { ModelService } from "./model.service";
-import { Usage, User } from "@prisma/client";
-import { CurrentUser } from "src/decorators/current-user.decorator";
+import { Usage } from "@prisma/client";
 
 @Controller("/api/v1/model")
 export class ModelController {
@@ -11,8 +10,8 @@ export class ModelController {
   async addUsage(
     @Body() usage: Usage,
     @Query("password") password: string,
-    @CurrentUser() currentUser: User,
+    @Req() req,
   ) {
-    await this.modelService.addUsage(usage, password, currentUser);
+    await this.modelService.addUsage(usage, password, req.user);
   }
 }

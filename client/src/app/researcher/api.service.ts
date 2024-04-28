@@ -14,8 +14,8 @@ export class ApiService {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: this.token(),
       },
-      credentials: 'include',
     });
 
     await this.checkResponse(response);
@@ -28,8 +28,8 @@ export class ApiService {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: this.token(),
       },
-      credentials: 'include',
     });
 
     await this.checkResponse(response);
@@ -37,11 +37,15 @@ export class ApiService {
     return await response.json();
   }
 
+  token(): string {
+    return 'Bearer ' + sessionStorage.getItem('token');
+  }
+
   private async checkResponse(response: Response): Promise<void> {
     if (!response.ok) {
       const errorResponse = await response.json();
 
-      alert(errorResponse);
+      alert(errorResponse.message);
 
       throw new Error(errorResponse);
     }

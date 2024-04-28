@@ -20,23 +20,17 @@ export class ApiService {
     dob: string,
     password: string,
   ): Promise<void> {
-    const response: Response = await fetch(
-      `${this.baseUrl}/auth/` +
-        Role.PATIENT +
-        '?' +
-        new URLSearchParams({
-          userId: userId,
-          dob: dob,
-          password: password,
-        }),
-      {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'include',
+    const response: Response = await fetch(`${this.baseUrl}/auth`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
       },
-    );
+      body: JSON.stringify({
+        userId: userId,
+        dob: dob,
+        password: password,
+      }),
+    });
 
     await this.checkResponse(response);
 
@@ -44,31 +38,26 @@ export class ApiService {
     sessionStorage.setItem('role', Role.PATIENT);
     sessionStorage.setItem('password', password);
     sessionStorage.setItem('dob', dob);
+    sessionStorage.setItem('token', (await response.json()).access_token);
   }
 
   async loginResearcher(userId: string, password: string): Promise<void> {
-    const response: Response = await fetch(
-      `${this.baseUrl}/auth/` +
-        Role.RESEARCHER +
-        '?' +
-        new URLSearchParams({
-          userId: userId,
-          password: password,
-        }),
-      {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'include',
+    const response: Response = await fetch(`${this.baseUrl}/auth`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
       },
-    );
+      body: JSON.stringify({
+        userId: userId,
+        password: password,
+      }),
+    });
 
     await this.checkResponse(response);
 
     sessionStorage.setItem('userId', userId);
     sessionStorage.setItem('role', Role.RESEARCHER);
-    sessionStorage.setItem('password', password);
+    sessionStorage.setItem('token', (await response.json()).access_token);
   }
 
   async loginAdmin(userId: string, password: string): Promise<void> {
@@ -93,7 +82,7 @@ export class ApiService {
 
     sessionStorage.setItem('userId', userId);
     sessionStorage.setItem('role', Role.ADMIN);
-    sessionStorage.setItem('password', password);
+    sessionStorage.setItem('token', (await response.json()).access_token);
   }
 
   private async checkResponse(response: Response): Promise<void> {

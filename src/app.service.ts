@@ -2,36 +2,40 @@ import { BadRequestException, Injectable } from "@nestjs/common";
 import { Role, User } from "@prisma/client";
 import { PrismaService } from "./prisma.service";
 import { Hashing } from "./utils/hashing.util";
+import { JwtService } from "@nestjs/jwt";
 
 @Injectable()
 export class AppService {
-  constructor(private prismaService: PrismaService) {}
+  constructor(
+    private prismaService: PrismaService,
+    private jwtService: JwtService,
+  ) {}
 
-  async authenticate(
-    userId: string,
-    password: string,
-    dob: string,
-  ): Promise<void> {
+  async authenticate(userCredentials): Promise<{ access_token: string }> {
     const user: User = await this.prismaService.user.findUnique({
       where: {
-        userId: userId,
+        userId: userCredentials.userId,
       },
     });
 
     if (user == null) {
-      throw new BadRequestException("Patient Not Found");
+      throw new BadRequestException("User Not Found");
     }
 
-    if (!Hashing.verify(password, user.password)) {
+    if (!Hashing.verify(userCredentials.password, user.password)) {
       throw new BadRequestException("Not Authorized");
     }
 
     if (
-      dob != null &&
+      userCredentials.dob &&
       user.role == Role.ROLE_PATIENT &&
-      !Hashing.verify(dob, user.dob)
+      !Hashing.verify(userCredentials.dob, user.dob)
     ) {
       throw new BadRequestException("Not Authorized");
     }
+
+    return {
+      access_token: await this.jwtService.signAsync(user),
+    };
   }
 }
