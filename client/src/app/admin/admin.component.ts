@@ -1,6 +1,6 @@
 import { Component, OnInit, WritableSignal, signal } from '@angular/core';
 import { ApiService } from './api.service';
-import { Hospital, Model, Researcher, User } from './types';
+import { Hospital, Model, Researcher, Role, User } from './types';
 import {
   FormControl,
   FormGroup,
@@ -67,40 +67,43 @@ export class AdminComponent implements OnInit {
     ]),
   });
 
-  constructor(private api: ApiService, private router: Router) {
-    if (sessionStorage.getItem('role') !== 'ROLE_ADMIN') {
+  constructor(
+    private apiService: ApiService,
+    private router: Router,
+  ) {
+    if (sessionStorage.getItem('role') !== Role.ADMIN) {
       this.router.navigate(['/']);
     }
   }
 
   async ngOnInit(): Promise<void> {
-    this.hospitals.set(await this.api.getHospitals());
-    this.researchers.set(await this.api.getResearchers());
-    this.models.set(await this.api.getModels());
+    this.hospitals.set(await this.apiService.getHospitals());
+    this.researchers.set(await this.apiService.getResearchers());
+    this.models.set(await this.apiService.getModels());
   }
 
   async deleteHospital(userId: string): Promise<void> {
-    await this.api.removeUser(userId);
-    this.hospitals.set(await this.api.getHospitals());
+    await this.apiService.removeUser(userId);
+    this.hospitals.set(await this.apiService.getHospitals());
   }
 
   async deleteResearcher(userId: string): Promise<void> {
-    await this.api.removeUser(userId);
-    this.researchers.set(await this.api.getResearchers());
+    await this.apiService.removeUser(userId);
+    this.researchers.set(await this.apiService.getResearchers());
   }
 
   async deleteModel(modelId: number): Promise<void> {
-    await this.api.deleteModel(modelId);
-    this.models.set(await this.api.getModels());
+    await this.apiService.deleteModel(modelId);
+    this.models.set(await this.apiService.getModels());
   }
 
   async addHospital(): Promise<void> {
     if (this.hospitalForm.invalid) {
       alert(this.hospitalForm.errors);
     } else {
-      await this.api.addHospital(this.hospitalForm.value as Hospital);
+      await this.apiService.addHospital(this.hospitalForm.value as Hospital);
       this.hospitalForm.reset();
-      this.hospitals.set(await this.api.getHospitals());
+      this.hospitals.set(await this.apiService.getHospitals());
     }
   }
 
@@ -108,9 +111,11 @@ export class AdminComponent implements OnInit {
     if (this.researcherForm.invalid) {
       alert(this.researcherForm.errors);
     } else {
-      await this.api.addResearcher(this.researcherForm.value as Researcher);
+      await this.apiService.addResearcher(
+        this.researcherForm.value as Researcher,
+      );
       this.researcherForm.reset();
-      this.researchers.set(await this.api.getResearchers());
+      this.researchers.set(await this.apiService.getResearchers());
     }
   }
 
@@ -118,12 +123,12 @@ export class AdminComponent implements OnInit {
     if (this.modelForm.invalid) {
       alert(this.modelForm.errors);
     } else {
-      await this.api.addModel(
+      await this.apiService.addModel(
         this.modelForm.value as Model,
-        this.modelForm.value.password as string
+        this.modelForm.value.password as string,
       );
       this.modelForm.reset();
-      this.models.set(await this.api.getModels());
+      this.models.set(await this.apiService.getModels());
     }
   }
 }

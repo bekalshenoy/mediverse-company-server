@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Role } from './types';
 
 @Injectable({
   providedIn: 'root',
@@ -11,11 +12,11 @@ export class ApiService {
   async loginPatient(
     userId: string,
     dob: string,
-    password: string
+    password: string,
   ): Promise<void> {
     const response: Response = await fetch(
       `${this.baseUrl}/auth/` +
-        'ROLE_PATIENT' +
+        Role.PATIENT +
         '?' +
         new URLSearchParams({
           userId: userId,
@@ -28,13 +29,13 @@ export class ApiService {
           'Content-Type': 'application/json',
         },
         credentials: 'include',
-      }
+      },
     );
 
     await this.checkResponse(response);
 
     sessionStorage.setItem('userId', userId);
-    sessionStorage.setItem('role', 'ROLE_PATIENT');
+    sessionStorage.setItem('role', Role.PATIENT);
     sessionStorage.setItem('password', password);
     sessionStorage.setItem('dob', dob);
   }
@@ -42,7 +43,7 @@ export class ApiService {
   async loginResearcher(userId: string, password: string): Promise<void> {
     const response: Response = await fetch(
       `${this.baseUrl}/auth/` +
-        'ROLE_RESEARCHER' +
+        Role.RESEARCHER +
         '?' +
         new URLSearchParams({
           userId: userId,
@@ -54,20 +55,20 @@ export class ApiService {
           'Content-Type': 'application/json',
         },
         credentials: 'include',
-      }
+      },
     );
 
     await this.checkResponse(response);
 
     sessionStorage.setItem('userId', userId);
-    sessionStorage.setItem('role', 'ROLE_RESEARCHER');
+    sessionStorage.setItem('role', Role.RESEARCHER);
     sessionStorage.setItem('password', password);
   }
 
   async loginAdmin(userId: string, password: string): Promise<void> {
     const response: Response = await fetch(
       `${this.baseUrl}/auth/` +
-        'ROLE_ADMIN' +
+        Role.ADMIN +
         '?' +
         new URLSearchParams({
           userId: userId,
@@ -79,19 +80,19 @@ export class ApiService {
           'Content-Type': 'application/json',
         },
         credentials: 'include',
-      }
+      },
     );
 
     await this.checkResponse(response);
 
     sessionStorage.setItem('userId', userId);
-    sessionStorage.setItem('role', 'ROLE_ADMIN');
+    sessionStorage.setItem('role', Role.ADMIN);
     sessionStorage.setItem('password', password);
   }
 
   private async checkResponse(response: Response): Promise<void> {
     if (!response.ok) {
-      let errorResponse = await response.json();
+      const errorResponse = await response.json();
 
       alert(errorResponse);
 

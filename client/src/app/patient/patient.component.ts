@@ -1,5 +1,5 @@
 import { Component, OnInit, WritableSignal, signal } from '@angular/core';
-import { MedicalReport, Patient, Report, User } from './types';
+import { MedicalReport, Patient, Report, Role, User } from './types';
 import { ApiService } from './api.service';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -30,8 +30,11 @@ export class PatientComponent implements OnInit {
     Validators.minLength(12),
   ]);
 
-  constructor(private apiService: ApiService, private router: Router) {
-    if (sessionStorage.getItem('role') !== 'ROLE_PATIENT') {
+  constructor(
+    private apiService: ApiService,
+    private router: Router,
+  ) {
+    if (sessionStorage.getItem('role') !== Role.PATIENT) {
       this.router.navigate(['/']);
     }
   }
@@ -78,8 +81,8 @@ export class PatientComponent implements OnInit {
       await this.apiService.getMedicalReport(
         reportId,
         this.dob(),
-        this.password()
-      )
+        this.password(),
+      ),
     );
   }
 }

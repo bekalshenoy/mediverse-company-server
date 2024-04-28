@@ -3,6 +3,7 @@ import { ApiService } from './api.service';
 import { Model, Payment } from './types';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { Role } from '../types';
 
 @Component({
   selector: 'app-researcher',
@@ -16,8 +17,11 @@ export class ResearcherComponent implements OnInit {
   payments: WritableSignal<Payment[]> = signal([]);
   currentSection: WritableSignal<number> = signal(1);
 
-  constructor(private apiService: ApiService, private router: Router) {
-    if (sessionStorage.getItem('role') !== 'ROLE_RESEARCHER') {
+  constructor(
+    private apiService: ApiService,
+    private router: Router,
+  ) {
+    if (sessionStorage.getItem('role') !== Role.RESEARCHER) {
       this.router.navigate(['/']);
     }
   }
