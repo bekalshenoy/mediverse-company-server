@@ -3,7 +3,7 @@ import { ApiService } from './api.service';
 import { Model, Payment } from './types';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { Role } from '../types';
+import { Role } from '../api.service';
 
 @Component({
   selector: 'app-researcher',

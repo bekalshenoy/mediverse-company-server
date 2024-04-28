@@ -1,8 +1,9 @@
 import { Component, OnInit, WritableSignal, signal } from '@angular/core';
-import { MedicalReport, Patient, Report, Role, User } from './types';
+import { MedicalReport, Patient, Report, User } from './types';
 import { ApiService } from './api.service';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Role } from '../api.service';
 
 @Component({
   selector: 'app-patient',

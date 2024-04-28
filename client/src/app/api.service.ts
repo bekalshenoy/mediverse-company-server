@@ -1,5 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Role } from './types';
+
+export enum Role {
+  ADMIN = 'ROLE_ADMIN',
+  RESEARCHER = 'ROLE_RESEARCHER',
+  PATIENT = 'ROLE_PATIENT',
+  MODEL = 'ROLE_MODEL',
+}
 
 @Injectable({
   providedIn: 'root',

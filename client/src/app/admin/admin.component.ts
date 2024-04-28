@@ -1,6 +1,6 @@
 import { Component, OnInit, WritableSignal, signal } from '@angular/core';
 import { ApiService } from './api.service';
-import { Hospital, Model, Researcher, Role, User } from './types';
+import { Hospital, Model, Researcher, User } from './types';
 import {
   FormControl,
   FormGroup,
@@ -9,6 +9,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { Role } from '../api.service';
 
 @Component({
   selector: 'app-admin',
