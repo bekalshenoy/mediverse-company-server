@@ -20,9 +20,9 @@ export class ApiService {
 
     await this.checkResponse(response);
 
-    let patient: Patient = await response.json();
+    const patient: Patient = await response.json();
 
-    // @ts-ignore
+    // @ts-expect-error - ignored userId
     patient.family = patient.family.map((member: Family) => {
       return member.memberId;
     });
@@ -53,7 +53,7 @@ export class ApiService {
           'Content-Type': 'application/json',
         },
         credentials: 'include',
-      }
+      },
     );
 
     await this.checkResponse(response);
@@ -64,7 +64,7 @@ export class ApiService {
   async getMedicalReport(
     entryId: string,
     dob: string,
-    password: string
+    password: string,
   ): Promise<MedicalReport> {
     const response: Response = await fetch(
       `${this.baseUrl}/report/${entryId}?` +
@@ -78,7 +78,7 @@ export class ApiService {
           'Content-Type': 'application/json',
         },
         credentials: 'include',
-      }
+      },
     );
 
     await this.checkResponse(response);
@@ -110,7 +110,7 @@ export class ApiService {
           'Content-Type': 'application/json',
         },
         credentials: 'include',
-      }
+      },
     );
 
     await this.checkResponse(response);
@@ -118,7 +118,7 @@ export class ApiService {
 
   private async checkResponse(response: Response): Promise<void> {
     if (!response.ok) {
-      let errorResponse = await response.json();
+      const errorResponse = await response.json();
 
       alert(errorResponse);
 

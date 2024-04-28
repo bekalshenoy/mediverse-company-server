@@ -13,28 +13,29 @@
     >
   </div>
 
-  @if(currentSection() == 1){
-  <div id="models" class="section">
-    @for(model of models(); track model.modelId){
-    <div class="card">
-      <p>Name: {{ model.name }}</p>
-      <p>Description: {{ model.description }}</p>
-      <p>Cost: {{ model.cost }}₹</p>
-      <p>Usage: {{ model.usage }}+</p>
-      <p>Est. Earning: {{ model.usage * model.cost }}₹</p>
+  @if (currentSection() == 1) {
+    <div id="models" class="section">
+      @for (model of models(); track model.modelId) {
+        <div class="card">
+          <p>Name: {{ model.name }}</p>
+          <p>Description: {{ model.description }}</p>
+          <p>Cost: {{ model.cost }}₹</p>
+          <p>Usage: {{ model.usage }}+</p>
+          <p>Est. Earning: {{ model.usage * model.cost }}₹</p>
+        </div>
+      }
     </div>
-    }
-  </div>
-  } @if(currentSection() == 2){
-  <div id="payments" class="section">
-    @for(payment of payments(); track payment.paymentId){
-    <div class="card">
-      <p>Name: {{ payment.modelId }}</p>
-      <p>Amount: {{ payment.amount }}₹</p>
-      <p>Start: {{ payment.startDate }}</p>
-      <p>End: {{ payment.endDate }}</p>
+  }
+  @if (currentSection() == 2) {
+    <div id="payments" class="section">
+      @for (payment of payments(); track payment.paymentId) {
+        <div class="card">
+          <p>Name: {{ payment.modelId }}</p>
+          <p>Amount: {{ payment.amount }}₹</p>
+          <p>Start: {{ payment.startDate }}</p>
+          <p>End: {{ payment.endDate }}</p>
+        </div>
+      }
     </div>
-    }
-  </div>
   }
 </div>

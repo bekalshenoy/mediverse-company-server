@@ -19,42 +19,45 @@
   <h1>Check Reports</h1>
   <div>
     <div>
-      Select One: @if(currentSection() > 0){
-      <span (click)="currentSection.set(1)">Hospitals</span>
-      }@else if(currentSection() > 1){
-      {{ " >" }} <span (click)="currentSection.set(2)">Reports</span>
-      }@else if(currentSection() > 2){
-      {{ " >" }} <span (click)="currentSection.set(3)">Medical Report</span>
+      Select One:
+      @if (currentSection() > 0) {
+        <span (click)="currentSection.set(1)">Hospitals</span>
+      } @else if (currentSection() > 1) {
+        {{ " >" }} <span (click)="currentSection.set(2)">Reports</span>
+      } @else if (currentSection() > 2) {
+        {{ " >" }} <span (click)="currentSection.set(3)">Medical Report</span>
       }
     </div>
-    @if(currentSection() == 1){
-    <div class="section">
-      @for(hospital of hospitals(); track hospital.userId){
-      <div class="card" (click)="getReports(hospital.userId)">
-        <p>Email: {{ hospital.userId }}</p>
-        <p>Name: {{ hospital.name }}</p>
-        <p>Phone: {{ hospital.phone }}</p>
-        <p>Location: {{ hospital.location }}</p>
+    @if (currentSection() == 1) {
+      <div class="section">
+        @for (hospital of hospitals(); track hospital.userId) {
+          <div class="card" (click)="getReports(hospital.userId)">
+            <p>Email: {{ hospital.userId }}</p>
+            <p>Name: {{ hospital.name }}</p>
+            <p>Phone: {{ hospital.phone }}</p>
+            <p>Location: {{ hospital.location }}</p>
+          </div>
+        }
       </div>
-      }
-    </div>
-    } @if(currentSection() == 2){
-    <div class="section">
-      @for(report of reports(); track report.entryId){
-      <div class="card" (click)="getMedicalReport(report.entryId)">
-        <p>Report ID: {{ report.reportId }}</p>
+    }
+    @if (currentSection() == 2) {
+      <div class="section">
+        @for (report of reports(); track report.entryId) {
+          <div class="card" (click)="getMedicalReport(report.entryId)">
+            <p>Report ID: {{ report.reportId }}</p>
+          </div>
+        }
       </div>
-      }
-    </div>
-    } @if(currentSection() == 3){
-    <div class="section">
-      @for(section of medicalReport().section; track section.position){
-      <div class="card">
-        <h3>{{ section.question }}</h3>
-        <p>{{ section.answer }}</p>
+    }
+    @if (currentSection() == 3) {
+      <div class="section">
+        @for (section of medicalReport().section; track section.position) {
+          <div class="card">
+            <h3>{{ section.question }}</h3>
+            <p>{{ section.answer }}</p>
+          </div>
+        }
       </div>
-      }
-    </div>
     }
   </div>
 </div>

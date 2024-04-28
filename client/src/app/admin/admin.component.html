@@ -63,44 +63,46 @@
       </span>
     </div>
 
-    @if(currentSection() == 1){
-    <div class="section">
-      @for(hospital of hospitals(); track hospital.userId){
-      <div class="card">
-        <p>{{ hospital.userId }}</p>
-        <p>{{ hospital.name }}</p>
-        <p>{{ hospital.phone }}</p>
-        <p>{{ hospital.location }}</p>
-        <p>{{ hospital.server }}</p>
-        <button (click)="deleteHospital(hospital.userId)">delete</button>
+    @if (currentSection() == 1) {
+      <div class="section">
+        @for (hospital of hospitals(); track hospital.userId) {
+          <div class="card">
+            <p>{{ hospital.userId }}</p>
+            <p>{{ hospital.name }}</p>
+            <p>{{ hospital.phone }}</p>
+            <p>{{ hospital.location }}</p>
+            <p>{{ hospital.server }}</p>
+            <button (click)="deleteHospital(hospital.userId)">delete</button>
+          </div>
+        }
       </div>
-      }
-    </div>
-    } @else if(currentSection() == 2){
-    <div class="section">
-      @for(researcher of researchers(); track researcher.userId){
-      <div class="card">
-        <p>{{ researcher.userId }}</p>
-        <p>{{ researcher.name }}</p>
-        <p>{{ researcher.phone }}</p>
-        <p>{{ researcher.location }}</p>
-        <button (click)="deleteResearcher(researcher.userId)">delete</button>
+    } @else if (currentSection() == 2) {
+      <div class="section">
+        @for (researcher of researchers(); track researcher.userId) {
+          <div class="card">
+            <p>{{ researcher.userId }}</p>
+            <p>{{ researcher.name }}</p>
+            <p>{{ researcher.phone }}</p>
+            <p>{{ researcher.location }}</p>
+            <button (click)="deleteResearcher(researcher.userId)">
+              delete
+            </button>
+          </div>
+        }
       </div>
-      }
-    </div>
-    } @else if(currentSection() == 3){
-    <div class="section">
-      @for(model of models(); track model.modelId){
-      <div class="card">
-        <p>{{ model.name }}</p>
-        <p>{{ model.description }}</p>
-        <p>{{ model.cost }}</p>
-        <p>{{ model.server }}</p>
-        <p>{{ model.researcherId }}</p>
-        <button (click)="deleteModel(model.modelId)">delete</button>
+    } @else if (currentSection() == 3) {
+      <div class="section">
+        @for (model of models(); track model.modelId) {
+          <div class="card">
+            <p>{{ model.name }}</p>
+            <p>{{ model.description }}</p>
+            <p>{{ model.cost }}</p>
+            <p>{{ model.server }}</p>
+            <p>{{ model.researcherId }}</p>
+            <button (click)="deleteModel(model.modelId)">delete</button>
+          </div>
+        }
       </div>
-      }
-    </div>
     }
   </div>
 </div>

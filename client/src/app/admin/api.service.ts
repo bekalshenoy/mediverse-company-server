@@ -48,7 +48,7 @@ export class ApiService {
         },
         body: JSON.stringify(model),
         credentials: 'include',
-      }
+      },
     );
 
     await this.checkResponse(response);
@@ -105,7 +105,7 @@ export class ApiService {
           'Content-Type': 'application/json',
         },
         credentials: 'include',
-      }
+      },
     );
 
     await this.checkResponse(response);
@@ -120,7 +120,7 @@ export class ApiService {
           'Content-Type': 'application/json',
         },
         credentials: 'include',
-      }
+      },
     );
 
     await this.checkResponse(response);
@@ -128,7 +128,7 @@ export class ApiService {
 
   private async checkResponse(response: Response): Promise<void> {
     if (!response.ok) {
-      let errorResponse = await response.json();
+      const errorResponse = await response.json();
 
       alert(errorResponse);
 

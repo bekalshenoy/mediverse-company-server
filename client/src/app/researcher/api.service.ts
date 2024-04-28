@@ -39,7 +39,7 @@ export class ApiService {
 
   private async checkResponse(response: Response): Promise<void> {
     if (!response.ok) {
-      let errorResponse = await response.json();
+      const errorResponse = await response.json();
 
       alert(errorResponse);
 

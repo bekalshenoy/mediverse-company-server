@@ -1,6 +1,6 @@
 import { Component, WritableSignal, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { ApiService } from './api.service';
 import { CommonModule } from '@angular/common';
 
@@ -20,7 +20,10 @@ export class AppComponent {
     password: new FormControl(''),
   });
 
-  constructor(private apiService: ApiService, private router: Router) {}
+  constructor(
+    private apiService: ApiService,
+    private router: Router,
+  ) {}
 
   async login(): Promise<void> {
     const { userId, dob, password } = this.loginForm.value;
