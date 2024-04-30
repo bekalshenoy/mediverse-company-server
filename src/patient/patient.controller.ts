@@ -7,7 +7,6 @@ import {
   Post,
   Query,
   Req,
-  Session,
   UseGuards,
 } from "@nestjs/common";
 import { PatientService } from "./patient.service";
@@ -23,8 +22,8 @@ export class PatientController {
   constructor(private patientService: PatientService) {}
 
   @Get("/")
-  async getPatient(@Session() session: any): Promise<Patient> {
-    return await this.patientService.getPatient(session.userId);
+  async getPatient(@Req() req): Promise<Patient> {
+    return await this.patientService.getPatient(req.user.userId);
   }
 
   @Get("/hospital")

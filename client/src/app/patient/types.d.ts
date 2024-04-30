@@ -50,5 +50,4 @@ export interface Section {
   reportId: number;
   question: string;
   answer: string;
-  position: number;
 }

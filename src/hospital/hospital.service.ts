@@ -152,7 +152,7 @@ export class HospitalService {
 
     await this.prismaService.report.create({
       data: {
-        reportId: reportId,
+        reportId: Number(reportId),
         hospitalId: currentUser.userId,
         patientId: patientId,
       },

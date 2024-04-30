@@ -62,9 +62,8 @@
         Models
       </span>
     </div>
-
-    @if (currentSection() == 1) {
-      <div class="section">
+    <div class="section">
+      @if (currentSection() == 1) {
         @for (hospital of hospitals(); track hospital.userId) {
           <div class="card">
             <p>{{ hospital.userId }}</p>
@@ -75,9 +74,7 @@
             <button (click)="deleteHospital(hospital.userId)">delete</button>
           </div>
         }
-      </div>
-    } @else if (currentSection() == 2) {
-      <div class="section">
+      } @else if (currentSection() == 2) {
         @for (researcher of researchers(); track researcher.userId) {
           <div class="card">
             <p>{{ researcher.userId }}</p>
@@ -89,9 +86,7 @@
             </button>
           </div>
         }
-      </div>
-    } @else if (currentSection() == 3) {
-      <div class="section">
+      } @else if (currentSection() == 3) {
         @for (model of models(); track model.modelId) {
           <div class="card">
             <p>{{ model.name }}</p>
@@ -102,7 +97,7 @@
             <button (click)="deleteModel(model.modelId)">delete</button>
           </div>
         }
-      </div>
-    }
+      }
+    </div>
   </div>
 </div>

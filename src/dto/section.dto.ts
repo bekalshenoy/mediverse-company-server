@@ -9,6 +9,4 @@ export class Section {
   @IsNotEmpty()
   @Length(1, 5000)
   answer: string;
-  @IsNotEmpty()
-  position: number;
 }

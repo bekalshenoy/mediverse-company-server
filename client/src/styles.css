@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 * {
   box-sizing: border-box;
 }
@@ -8,8 +12,8 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: #213547;
+  background-color: #eafff4;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -46,7 +50,7 @@ input {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: #ffffff;
   cursor: pointer;
   transition: border-color 0.25s;
 }
@@ -54,10 +58,7 @@ input {
 button {
   display: block;
   margin: 0.5em auto;
-}
-
-input {
-  background-color: #333333;
+  background-color: #eeeeee;
 }
 
 button:hover,
@@ -67,7 +68,7 @@ input:hover {
 
 .card {
   border-radius: 8px;
-  background: #101020;
+  background: #adccff;
   padding: 1em;
   margin: 1em;
   min-width: 300px;
@@ -80,7 +81,7 @@ input:hover {
 }
 
 .card p {
-  background: #000000;
+  background-color: #ffffff;
   border-radius: 8px;
   padding: 0.5em;
   width: 100%;
@@ -92,6 +93,10 @@ button:focus-visible,
 input:focus,
 input:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+.card input {
+  background-color: #ffffff;
 }
 
 span {
@@ -108,36 +113,5 @@ span {
 }
 
 span.active {
-  background-color: #101020;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-
-  button {
-    background-color: #eeeeee;
-  }
-
-  input {
-    background-color: #dddddd;
-  }
-
-  .card input {
-    background-color: #ffffff;
-  }
-
-  .card {
-    background: #adccff;
-  }
-
-  .card p {
-    background: #ffffff;
-  }
-
-  span.active {
-    background-color: #adccff;
-  }
+  background-color: #adccff;
 }
