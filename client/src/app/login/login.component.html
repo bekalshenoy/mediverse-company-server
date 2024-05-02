@@ -2,19 +2,19 @@
   <div>
     Select One:
     <span
-      [ngClass]="{ active: currentSection() == 1 }"
+      [class]="{ active: currentSection() == 1 }"
       (click)="currentSection.set(1)"
     >
       Patient
     </span>
     <span
-      [ngClass]="{ active: currentSection() == 2 }"
+      [class]="{ active: currentSection() == 2 }"
       (click)="currentSection.set(2)"
     >
       Researcher
     </span>
     <span
-      [ngClass]="{ active: currentSection() == 3 }"
+      [class]="{ active: currentSection() == 3 }"
       (click)="currentSection.set(3)"
     >
       Admin
@@ -28,7 +28,7 @@
       type="date"
       placeholder="Date of Birth"
       formControlName="dob"
-      [ngStyle]="{ display: currentSection() == 1 ? 'inline-block' : 'none' }"
+      [style]="{ display: currentSection() == 1 ? 'inline-block' : 'none' }"
     />
     <input type="password" placeholder="Password" formControlName="password" />
     <button type="submit">Login</button>

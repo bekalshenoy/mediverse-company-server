@@ -1,4 +1,8 @@
-import { BadRequestException, Injectable } from "@nestjs/common";
+import {
+  BadRequestException,
+  ForbiddenException,
+  Injectable,
+} from "@nestjs/common";
 import { Model, Role, Usage, User } from "@prisma/client";
 import { PrismaService } from "src/prisma.service";
 import { Hashing } from "src/utils/hashing.util";
@@ -17,7 +21,7 @@ export class ModelService {
     });
 
     if (model == null || model.name != currentUser.userId) {
-      throw new BadRequestException(
+      throw new ForbiddenException(
         "You are not authorized to add usage for this model",
       );
     }
@@ -35,7 +39,7 @@ export class ModelService {
     }
 
     await this.prismaService.usage.create({
-      data: usage,
+      data: { ...usage, logged_at: new Date().toISOString() },
     });
   }
 }

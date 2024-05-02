@@ -44,19 +44,19 @@
     <div>
       Select One:
       <span
-        [ngClass]="{ active: currentSection() == 1 }"
+        [class]="{ active: currentSection() == 1 }"
         (click)="currentSection.set(1)"
       >
         Hospitals
       </span>
       <span
-        [ngClass]="{ active: currentSection() == 2 }"
+        [class]="{ active: currentSection() == 2 }"
         (click)="currentSection.set(2)"
       >
         Researchers
       </span>
       <span
-        [ngClass]="{ active: currentSection() == 3 }"
+        [class]="{ active: currentSection() == 3 }"
         (click)="currentSection.set(3)"
       >
         Models

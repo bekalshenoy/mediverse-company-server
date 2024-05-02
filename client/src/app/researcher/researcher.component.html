@@ -2,12 +2,12 @@
   <div>
     Select One:
     <span
-      [ngClass]="{ active: currentSection() == 1 }"
+      [class]="{ active: currentSection() == 1 }"
       (click)="currentSection.set(1)"
       >Models</span
     >
     <span
-      [ngClass]="{ active: currentSection() == 2 }"
+      [class]="{ active: currentSection() == 2 }"
       (click)="currentSection.set(2)"
       >Payments</span
     >

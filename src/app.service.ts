@@ -11,7 +11,9 @@ export class AppService {
     private jwtService: JwtService,
   ) {}
 
-  async authenticate(userCredentials): Promise<{ access_token: string }> {
+  async authenticate(
+    userCredentials,
+  ): Promise<{ user: User; access_token: string }> {
     const user: User = await this.prismaService.user.findUnique({
       where: {
         userId: userCredentials.userId,
@@ -35,6 +37,7 @@ export class AppService {
     }
 
     return {
+      user: user,
       access_token: await this.jwtService.signAsync(user),
     };
   }

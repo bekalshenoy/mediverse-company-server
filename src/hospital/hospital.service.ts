@@ -62,10 +62,14 @@ export class HospitalService {
       throw new NotFoundException("Patient Not Found");
     }
 
-    return (
-      Hashing.verify(user.password, patientPassword) &&
-      Hashing.verify(user.dob, dob)
-    );
+    if (
+      !Hashing.verify(user.password, patientPassword) ||
+      !Hashing.verify(user.dob, dob)
+    ) {
+      throw new NotFoundException("IncorrectCredentials");
+    }
+
+    return user;
   }
 
   async checkPatientWithFamily(
@@ -73,7 +77,7 @@ export class HospitalService {
     memberId: string,
     memberPassword: string,
     patientDob: string,
-  ): Promise<boolean> {
+  ) {
     const user: User = await this.prismaService.user.findUnique({
       where: {
         userId: patientId,
@@ -113,7 +117,7 @@ export class HospitalService {
       throw new NotFoundException("Incorrect Date of Birth");
     }
 
-    return true;
+    return user;
   }
 
   async getModels(currentUser: User): Promise<Model[]> {

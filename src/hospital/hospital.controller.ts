@@ -36,7 +36,7 @@ export class HospitalController {
     @Param("memberId") memberId: string,
     @Query("password") password: string,
     @Query("dob") dob: string,
-  ): Promise<boolean> {
+  ) {
     return await this.hospitalService.checkPatientWithFamily(
       patientId,
       memberId,
@@ -50,7 +50,7 @@ export class HospitalController {
     @Param("id") patientId,
     @Query("password") password,
     @Query("dob") dob,
-  ): Promise<boolean> {
+  ) {
     return await this.hospitalService.checkPassword(patientId, password, dob);
   }
 
