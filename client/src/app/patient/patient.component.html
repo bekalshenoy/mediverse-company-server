@@ -25,9 +25,11 @@
       Select One:
       @if (currentSection() > 0) {
         <span (click)="currentSection.set(1)">Hospitals</span>
-      } @else if (currentSection() > 1) {
+      }
+      @if (currentSection() > 1) {
         {{ " >" }} <span (click)="currentSection.set(2)">Reports</span>
-      } @else if (currentSection() > 2) {
+      }
+      @if (currentSection() > 2) {
         {{ " >" }} <span (click)="currentSection.set(3)">Medical Report</span>
       }
     </div>
@@ -50,12 +52,12 @@
         }
       }
       @if (currentSection() == 3) {
-        @for (section of medicalReport().section; track $index) {
-          <div class="card">
-            <h3>{{ section.question }}</h3>
+        <div class="card">
+          @for (section of medicalReport().section; track $index) {
+            <h3 style="text-align: left">{{ section.question }}</h3>
             <p>{{ section.answer }}</p>
-          </div>
-        }
+          }
+        </div>
       }
     </div>
   </div>

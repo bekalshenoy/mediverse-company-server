@@ -122,6 +122,7 @@ export class PatientService {
         )
       ).data;
     } catch (e) {
+      console.log(e);
       throw new InternalServerErrorException("Error Finding Report");
     }
   }

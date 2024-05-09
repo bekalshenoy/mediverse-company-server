@@ -1,11 +1,5 @@
 import { Family } from "@prisma/client";
-import {
-  IsDateString,
-  IsEmail,
-  IsNotEmpty,
-  IsNumberString,
-  Length,
-} from "class-validator";
+import { IsNotEmpty, IsNumberString, Length } from "class-validator";
 
 export class Patient {
   constructor(
@@ -27,7 +21,6 @@ export class Patient {
   }
 
   @IsNotEmpty()
-  @IsEmail()
   @Length(1, 320)
   userId: string;
   @IsNotEmpty()
@@ -44,7 +37,6 @@ export class Patient {
   @Length(8, 50)
   password: string;
   @IsNotEmpty()
-  @IsDateString()
   dob: string;
   @IsNotEmpty()
   family: Family[];

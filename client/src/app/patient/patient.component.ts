@@ -73,6 +73,7 @@ export class PatientComponent implements OnInit {
 
   async getReports(userId: string): Promise<void> {
     this.reports.set(await this.apiService.getReports(userId));
+    this.currentSection.set(2);
   }
 
   async getMedicalReport(reportId: number): Promise<void> {
@@ -83,5 +84,6 @@ export class PatientComponent implements OnInit {
         this.password(),
       ),
     );
+    this.currentSection.set(3);
   }
 }
