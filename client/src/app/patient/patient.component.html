@@ -1,21 +1,59 @@
-<div class="app">
+<div
+  class="max-w-[1280px] grid place-items-center min-w-80 min-h-full mx-auto text-center p-8"
+>
   <div class="section">
-    <div class="card">
+    <div
+      class="m-4 max-w-80 inline-block w-fit bg-white bg-opacity-50 p-8 rounded-2xl shadow-md text-black"
+    >
       <h2>Details</h2>
-      <p>Name: {{ patient().name }}</p>
-      <p>Phone: {{ patient().phone }}</p>
-      <p>Location: {{ patient().location }}</p>
-      <p>Family Members: {{ patient().family.join(", ") }}</p>
+      <p class="bg-white w-full p-4 my-2 text-left rounded-2xl">
+        Name: {{ patient().name }}
+      </p>
+      <p class="bg-white w-full p-4 my-2 text-left rounded-2xl">
+        Phone: {{ patient().phone }}
+      </p>
+      <p class="bg-white w-full p-4 my-2 text-left rounded-2xl">
+        Location: {{ patient().location }}
+      </p>
+      <p class="bg-white w-full p-4 my-2 text-left rounded-2xl">
+        Family Members: {{ patient().family.join(", ") }}
+      </p>
     </div>
-    <form class="card" (submit)="addFamilyMember()">
+    <form
+      class="m-4 max-w-80 inline-block w-fit bg-white p-8 rounded-2xl shadow-md text-black"
+      (submit)="addFamilyMember()"
+    >
       <h2>Add Member</h2>
-      <input type="text" placeholder="Member ID" [formControl]="addMember" />
-      <button type="submit">Add</button>
+      <input
+        type="text"
+        placeholder="Member ID"
+        [formControl]="addMember"
+        class="w-full bg-transparent text-black border border-transparent border-b-gray-400 py-2 px-4 focus:outline-none focus:border-b-black my-2"
+      />
+      <button
+        type="submit"
+        class="bg-purple-500 hover:bg-purple-600 rounded-full text-white font-bold shadow-md py-2 px-4 focus:outline-none"
+      >
+        Add
+      </button>
     </form>
-    <form class="card" (submit)="deleteFamilyMember()">
+    <form
+      class="m-4 max-w-80 inline-block w-fit bg-white p-8 rounded-2xl shadow-md text-black"
+      (submit)="deleteFamilyMember()"
+    >
       <h2>Delete Member</h2>
-      <input type="text" placeholder="Member ID" [formControl]="deleteMember" />
-      <button type="submit">Member</button>
+      <input
+        type="text"
+        placeholder="Member ID"
+        [formControl]="deleteMember"
+        class="w-full bg-transparent text-black border border-transparent border-b-gray-400 py-2 px-4 focus:outline-none focus:border-b-black my-2"
+      />
+      <button
+        type="submit"
+        class="bg-purple-500 hover:bg-purple-600 rounded-full text-white font-bold shadow-md py-2 px-4 focus:outline-none"
+      >
+        Member
+      </button>
     </form>
   </div>
 
@@ -36,26 +74,46 @@
     <div class="section">
       @if (currentSection() == 1) {
         @for (hospital of hospitals(); track hospital.userId) {
-          <div class="card" (click)="getReports(hospital.userId)">
-            <p>Email: {{ hospital.userId }}</p>
-            <p>Name: {{ hospital.name }}</p>
-            <p>Phone: {{ hospital.phone }}</p>
-            <p>Location: {{ hospital.location }}</p>
+          <div
+            class="m-4 min-w-80 max-w-96 w-fit inline-block bg-white bg-opacity-50 p-8 rounded-2xl shadow-md text-black"
+            (click)="getReports(hospital.userId)"
+          >
+            <p class="bg-white w-full p-4 my-2 text-left rounded-2xl">
+              Email: {{ hospital.userId }}
+            </p>
+            <p class="bg-white w-full p-4 my-2 text-left rounded-2xl">
+              Name: {{ hospital.name }}
+            </p>
+            <p class="bg-white w-full p-4 my-2 text-left rounded-2xl">
+              Phone: {{ hospital.phone }}
+            </p>
+            <p class="bg-white w-full p-4 my-2 text-left rounded-2xl">
+              Location: {{ hospital.location }}
+            </p>
           </div>
         }
       }
       @if (currentSection() == 2) {
         @for (report of reports(); track report.entryId) {
-          <div class="card" (click)="getMedicalReport(report.entryId)">
-            <p>Report ID: {{ report.reportId }}</p>
+          <div
+            class="m-4 min-w-80 max-w-96 w-fit inline-block bg-white bg-opacity-50 p-8 rounded-2xl shadow-md text-black"
+            (click)="getMedicalReport(report.entryId)"
+          >
+            <p class="bg-white w-full p-4 my-2 text-left rounded-2xl">
+              Report ID: {{ report.reportId }}
+            </p>
           </div>
         }
       }
       @if (currentSection() == 3) {
-        <div class="card">
+        <div
+          class="m-4 min-w-80 w-fit bg-white bg-opacity-50 p-8 rounded-2xl shadow-md text-black"
+        >
           @for (section of medicalReport().section; track $index) {
-            <h3 style="text-align: left">{{ section.question }}</h3>
-            <p>{{ section.answer }}</p>
+            <h3 class="text-left text-black">{{ section.question }}</h3>
+            <p class="bg-white w-full p-4 my-2 text-left rounded-2xl">
+              {{ section.answer }}
+            </p>
           }
         </div>
       }
